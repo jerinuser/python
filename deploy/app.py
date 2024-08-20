@@ -11,11 +11,5 @@ def home():
         content = content
         )
 
-@app.route('/submit', methods=['POST'])
-def submit():
-    data = request.form['field_name']
-    # Process data
-    return 'Data submitted!'
-
 if __name__ == '__main__':
     app.run(debug=True)
