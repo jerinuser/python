@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Validation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .table-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            position: relative;
+        }
+        .table-box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            width: 100%;
+        }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .nav-button.left {
+            left: 0;
+        }
+        .nav-button.right {
+            right: 0;
+        }
+
+        table {
+            table-layout: fixed; /* Forces the table to ignore content size */
+        }
+        th, td {
+            width: 300px;
+            white-space: normal;
+            overflow-wrap: break-word;
+        }
+
+        th.small1, td.small1{
+            width: 85px;
+            overflow: normal;
+            white-space: nowrap;
+        }
+
+        .button {
+            background-color: #174fef;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        table, th, td {
+            border:1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 1600px;">
+        <h1 class="text-center">Data Validation: {{index}} / {{total_rows}}</h1>
+
+        <form action="{{ url_for('logout') }}" method="get">
+            <button type="submit" class="logout-button">Logout ({{ username }})</button>
+        </form>
+
+        <div class="table-container">
+            <button class="button" id="prevButton" onclick="window.location.href='/dashboard?index={{ index - 1 }}'">Prev</button>
+
+            <form action="/dashboard" method="post">
+                <div class="table-box">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>github link </th>
+                                        <th>github score </th>
+                                    </tr>
+                                </thead>
+                                {% if row %}
+                                <tbody>
+                                    <tr>
+                                        <td>{{ row['error'] }}</td>
+                                        <td class="small1" rowspan="4" style="vertical-align: middle; text-align: center;">
+                                            <input type="text" id="Label" name="Label" style="width: 80px;" value="{{ row['Label'] | int }}">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                {% endif %}
+                            </table>
+                            <input type="hidden" name="index" value="{{ index }}">
+                        </div>
+
+                        <div>
+                            <br>
+                            <input class="button" id="updateButton" type="submit" name="update" value="Update">
+                            <input class="button" type="submit" name="delete" value="Delete">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <button class="button" id="nextButton" onclick="window.location.href='/dashboard?index={{ index + 1 }}'">Next</button>
+        </div>
+
+        <script>
+            document.addEventListener('keydown', function(event) {
+                if (event.altKey && event.key === 'ArrowRight') {
+                    document.getElementById('nextButton').click();
+                }
+                if (event.key === 'ArrowRight') {
+                    document.getElementById('nextButton').click();
+                }
+
+                if (event.altKey && event.key === 'ArrowLeft') {
+                    document.getElementById('prevButton').click();
+                }
+                if (event.key === 'ArrowLeft') {
+                    document.getElementById('prevButton').click();
+                }
+
+                if (event.altKey && (event.key === '1' || event.code === 'Digit1')) {
+                    var inputElement = document.getElementById('Label');
+                    inputElement.value = '1';
+                    document.getElementById('updateButton').click();
+                }
+
+                if (event.altKey && (event.key === '0' || event.code === 'Digit0')) {
+                    var inputElement = document.getElementById('Label');
+                    inputElement.value = '0';
+                    document.getElementById('updateButton').click();
+                }
+            });
+        </script>
+
+    </div>
+</body>
+</html>

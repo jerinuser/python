@@ -1,0 +1,39 @@
+{
+    "admins": [
+        {
+            "admin_id": "score_101",
+            "username": "hari",
+            "password": "hari123"
+        },
+        {
+            "admin_id": "score_102",
+            "username": "soundaraya",
+            "password": "soundaraya123"
+        },
+        {
+            "admin_id": "score_103",
+            "username": "steve",
+            "password": "steve123"
+        },
+        {
+            "admin_id": "score_104",
+            "username": "jerin",
+            "password": "jerin123"
+        },
+        {
+            "admin_id": "score_105",
+            "username": "anbarasan",
+            "password": "anbarasan123"
+        },
+        {
+            "admin_id": "score_106",
+            "username": "abitha",
+            "password": "abitha123"
+        },
+        {
+            "admin_id": "score_107",
+            "username": "saravanan",
+            "password": "saravanan123"
+        }
+    ]
+}
